@@ -35,6 +35,11 @@
               <button type="submit" class="btn btn-primary"><i class="fa fa-user-plus"></i> Create Account</button>
               <a href="/login" class="btn btn-warning"><i class="fa fa-undo"></i> Cancel</a>
             </form>
+            <br>
+              <!-- Display flash messages  -->
+                <% for(var i in messages) { %>
+                   <div class="alert alert-danger"><%= messages[i] %></div>
+                <% } %>
         </div>
       </div>
     </div>

@@ -73,4 +73,3 @@ UserSchema.set('toJSON', {
 
 
 module.exports = mongoose.model('users', UserSchema);
-

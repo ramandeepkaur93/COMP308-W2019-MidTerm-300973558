@@ -38,8 +38,10 @@
         <% if ( user ) { %>
             <% if(title == "books") { %>
             <li class="active"><a href="/books"><i class="fa fa-book fa-lg"></i> Books List</a></li>
+            <li><a href="/signout"><i class="fa fa-sign-out fa-lg"></i> Sign-Out</a></li>
             <% } else { %>
               <li><a href="/books"><i class="fa fa-book fa-lg"></i> Books List</a></li>
+              <li><a href="/signout"><i class="fa fa-sign-out fa-lg"></i> Sign-Out</a></li>
             <% } %>
           <% } else { %>
             <li class="active"><a href="/login"><i class="fa fa-sign-in fa-lg"></i> Sign-In</a></li>

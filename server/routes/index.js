@@ -34,7 +34,7 @@ router.route('/login').post(passport.authenticate('local', {
 
 router.get('/register', (req, res, next) => {
   res.render('auth/register', {
-    title: 'Login',
+    title: 'Register',
     books: '',
     user: req.user,
     messages: req.flash('error') || req.flash('info')

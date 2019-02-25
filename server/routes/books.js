@@ -7,7 +7,7 @@ let mongoose = require('mongoose');
 let book = require('../models/books');
 
 /* GET books List page. READ */
-router.get('/', (req, res, next) => {
+router.get('/', isAuthenticated, (req, res, next) => {
   // find all books in the books collection
   book.find( (err, books) => {
     if (err) {
@@ -25,7 +25,7 @@ router.get('/', (req, res, next) => {
 });
 
 //  GET the Book Details page in order to add a new Book
-router.get('/add', (req, res, next) => {
+router.get('/add', isAuthenticated, (req, res, next) => {
 
      res.render('books/details', {
         title: 'Add Books',
@@ -36,7 +36,7 @@ router.get('/add', (req, res, next) => {
 });
 
 // POST process the Book Details page and create a new Book - CREATE
-router.post('/add', (req, res, next) => {
+router.post('/add', isAuthenticated,  (req, res, next) => {
 
      let newBook = new book();
      newBook.Title = req.body.title;
@@ -55,7 +55,7 @@ router.post('/add', (req, res, next) => {
 });
 
 // GET the Book Details page in order to edit an existing Book
-router.get('/:id', (req, res, next) => {
+router.get('/:id', isAuthenticated, (req, res, next) => {
 
 
      book.findById(req.params.id, (err, books) => {
@@ -74,7 +74,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 // POST - process the information passed from the details form and update the document
-router.post('/:id', (req, res, next) => {
+router.post('/:id', isAuthenticated ,(req, res, next) => {
 
 book.findById(req.params.id, (err, book) => {
        if (err) {
@@ -99,7 +99,7 @@ book.findById(req.params.id, (err, book) => {
 });
 
 // GET - process the delete by user id
-router.get('/delete/:id', (req, res, next) => {
+router.get('/delete/:id', isAuthenticated, (req, res, next) => {
 
       book.findByIdAndRemove(req.params.id, (err, books) => {
        if (err) {
@@ -111,5 +111,16 @@ router.get('/delete/:id', (req, res, next) => {
      });
 });
 
+function isAuthenticated(req, res, next) {
+  // do any checks you want to in here
+
+  // CHECK THE USER STORED IN SESSION FOR A CUSTOM VARIABLE
+  // you can do this however you want with whatever variables you set up
+  if (req.isAuthenticated())
+      return next();
+
+  // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
+  res.redirect('/');
+}
 
 module.exports = router;

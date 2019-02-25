@@ -1,0 +1,42 @@
+<% include ../partials/header.ejs %>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <h1><%= title %></h1>
+            <form class="form" method="post">
+              <div class="form-group">
+                <label for="UserNameTextField">User Name</label>
+                <input type="text" class="form-control" id="UserNameTextField"
+                placeholder="User Name" name="username"  required>
+              </div>
+              <div class="form-group">
+                <label for="FirstNameTextField">First Name</label>
+                <input type="text" class="form-control" id="FirstNameTextField"
+                placeholder="First Name" name="firstname"  required>
+              </div>
+              <div class="form-group">
+                <label for="LastNameTextField">Last Name</label>
+                <input type="text" class="form-control" id="LastNameTextField"
+                placeholder="Last Name" name="lastname"  required>
+              </div>
+              <div class="form-group">
+                <label for="EmailTextField">Email</label>
+                <input type="email" class="form-control" id="EmailTextField"
+                placeholder="Email" name="email"  required>
+              </div>
+              <div class="form-group">
+                <label for="PasswordTextField">Password</label>
+                <input type="password" class="form-control" id="PasswordTextField"
+                placeholder="Password" name="password"   required>
+              </div>
+
+              <button type="submit" class="btn btn-primary"><i class="fa fa-user-plus"></i> Create Account</button>
+              <a href="/login" class="btn btn-warning"><i class="fa fa-undo"></i> Cancel</a>
+            </form>
+        </div>
+      </div>
+    </div>
+
+<% include ../partials/footer.ejs %>

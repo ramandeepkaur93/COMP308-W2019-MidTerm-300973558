@@ -4,11 +4,19 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+let session = require('express-session');
+let passport = require('passport');
+let flash = require('connect-flash');
+
+
 
 // import "mongoose" - required for DB Access
 let mongoose = require('mongoose');
 // URI
 let config = require('./config/db');
+let sessionconfig = require('./config/session');
+
+let passportconfig = require('./config/passport');
 
 mongoose.connect(process.env.URI || config.URI, { useNewUrlParser: true });
 
@@ -18,6 +26,7 @@ mongoDB.once('open', ()=> {
   console.log("Connected to MongoDB...");
 });
 
+passportconfig();
 
 // define routers
 let index = require('./routes/index'); // top level routes
@@ -36,6 +45,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client')));
 
+app.use(session({
+	saveUninitialized: true,
+	resave: true,
+	secret: sessionconfig.sessionSecret
+}));
+
+app.use(flash()); //init connect-flash
+
+app.use(passport.initialize()); //bootstrapping the Passport module
+app.use(passport.session()); //keep track of your user's session
 
 // route redirects
 app.use('/', index);

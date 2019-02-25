@@ -27,18 +27,22 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav navbar-right">
+      <% if ( user ) { %>
+        <li ><a href="#"><%= user.firstname+" "+user.lastname %></a></li>
+      <% } %>
         <% if(title == "Home") { %>
           <li class="active"><a href="/"><i class="fa fa-home fa-lg"></i> Home</a></li>
         <% } else { %>
           <li><a href="/"><i class="fa fa-home fa-lg"></i> Home</a></li>
         <% } %>
-
-          <% if(title == "books") { %>
-          <li class="active"><a href="/books"><i class="fa fa-book fa-lg">
-          </i> Books List</a></li>
+        <% if ( user ) { %>
+            <% if(title == "books") { %>
+            <li class="active"><a href="/books"><i class="fa fa-book fa-lg"></i> Books List</a></li>
+            <% } else { %>
+              <li><a href="/books"><i class="fa fa-book fa-lg"></i> Books List</a></li>
+            <% } %>
           <% } else { %>
-            <li><a href="/books"><i class="fa fa-book fa-lg">
-            </i> Books List</a></li>
+            <li class="active"><a href="/login"><i class="fa fa-sign-in fa-lg"></i> Sign-In</a></li>
           <% } %>
 
       </ul>

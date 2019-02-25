@@ -11,7 +11,8 @@ let User = require('../models/users');
 router.get('/', (req, res, next) => {
   res.render('content/index', {
     title: 'Home',
-    books: ''
+    books: '',
+    user: req.user
    });
 });
 
@@ -20,13 +21,14 @@ router.get('/login', (req, res, next) => {
   res.render('auth/login', {
     title: 'Login',
     books: '',
+    user: req.user,
     messages: req.flash('error') || req.flash('info')
    });
 });
 
 router.route('/login').post(passport.authenticate('local', {
-	successRedirect: '/index/books',
-	failureRedirect: '/',
+	successRedirect: '/books/',
+	failureRedirect: '/login',
 	failureFlash: true
 }));
 
@@ -34,6 +36,7 @@ router.get('/register', (req, res, next) => {
   res.render('auth/register', {
     title: 'Login',
     books: '',
+    user: req.user,
     messages: req.flash('error') || req.flash('info')
    });
 });
@@ -57,8 +60,13 @@ router.post('/register', (req, res, next) => {
 			});
 		});
 	} else {
-		return res.redirect('/books/index');
+		return res.redirect('/books/');
 	}
+});
+
+router.get('/signout', function(req, res) {
+	req.logout(); // invalidate the authenticated session using a Passport method
+	res.redirect('/');
 });
 
 var getErrorMessage = function(err) {

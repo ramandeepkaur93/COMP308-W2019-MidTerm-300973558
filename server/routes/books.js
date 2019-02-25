@@ -16,7 +16,8 @@ router.get('/', (req, res, next) => {
     else {
       res.render('books/index', {
         title: 'Books',
-        books: books
+        books: books,
+        user: req.user
       });
     }
   });
@@ -29,6 +30,7 @@ router.get('/add', (req, res, next) => {
      res.render('books/details', {
         title: 'Add Books',
         books: new book(),
+        user: req.user
       });
 
 });
@@ -63,7 +65,8 @@ router.get('/:id', (req, res, next) => {
        else {
          res.render('books/details', {
            title: 'Book Details',
-           books: books
+           books: books,
+           user: req.user
          });
        }
      });

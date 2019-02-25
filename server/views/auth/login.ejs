@@ -17,9 +17,14 @@
                 placeholder="Password" name="password"   required>
               </div>
 
-              <button type="submit" class="btn btn-primary"><i class="fa fa-user"></i> Login</button>
+              <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Login</button>
               <a href="/register" class="btn btn-secondary"><i class="fa fa-signup"></i> Signup</a>
             </form>
+            <br>
+              <!-- Display flash messages  -->
+                <% for(var i in messages) { %>
+                   <div class="alert alert-danger"><%= messages[i] %></div>
+                <% } %>
         </div>
       </div>
     </div>
